@@ -1,4 +1,0 @@
-#contributor : Jimmy Wu <frozenthrone88@gmail.com>
-#name : <input ... />
-# --
-<input type="$1" name="$2" id="$3" value="$4" ${5:placeholder="$6"} />
