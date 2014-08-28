@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: cevent
+# key: cevent
+# expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))
+# --
+class $1 extends EventEmitter
+    constructor:()->
+        $0

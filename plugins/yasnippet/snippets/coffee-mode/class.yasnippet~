@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: class
+# key: class
+# --
+class ${1:class} extends ${2:Leaf.Widget}
+      constructor:($2)->
+	${3:super($4)}
