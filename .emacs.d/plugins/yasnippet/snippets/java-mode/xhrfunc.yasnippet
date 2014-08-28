@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: xhrfunc
+# key: xhrfunc
+# --
+xhr.onreadystatechange = function()
+{
+    if(${1:xhr}.readyState == 4)
+    {
+      $2
+    }
+}
+xhr.send('$3');
