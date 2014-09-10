@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: footer
+# key: 
+# binding: "keybinding"
+# expand-env: ((some-var some-value))
+# --
