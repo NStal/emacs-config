@@ -13,7 +13,6 @@
 (global-set-key (kbd "M-{") (gen-pair-handler "{" "}"))
 (provide 'custom-function)
 
-
 (defun npm-install (name)
   (interactive "MPackageName:\n")
   (progn
@@ -38,27 +37,4 @@
     )
     ))
 
-(defun nodejs-export-selected-var ()
-  """export the selected vard"""
-  (interactive)
-  (progn 
-    (save-excursion
-      (let ((name (buffer-substring (region-beginning) (region-end))))
-            (goto-char (point-max))
-            (insert "\n")
-            (insert (concat "exports." name " = " name))
-            )
-      )
-    )
-  )
-(defun coffee-global-require (name var)
-  """globally require the package"""
-  (interactive "Mpackage name: \nMvar name:\n")
-  (progn
-    (save-excursion
-      (goto-char (point-min))
-      (insert (concat var " = " "require(\"" name "\")\n"))
-      ))
-  )
-(global-set-key (kbd "C-c p") 'nodejs-export-selected-var)
-(global-set-key (kbd "C-c g") 'coffee-global-require)
+

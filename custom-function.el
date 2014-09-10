@@ -38,20 +38,6 @@
     )
     ))
 
-(defun nodejs-export-selected-var-as-module ()
-  """export the selected vard as module.exports = xxx"""
-  (interactive)
-  (progn 
-    (save-excursion
-      (let ((name (buffer-substring (region-beginning) (region-end))))
-            (goto-char (point-max))
-            (insert "\n")
-            (insert (concat "module.exports = " name))
-            )
-      )
-    )
-  )
-
 (defun nodejs-export-selected-var ()
   """export the selected vard"""
   (interactive)
@@ -60,30 +46,19 @@
       (let ((name (buffer-substring (region-beginning) (region-end))))
             (goto-char (point-max))
             (insert "\n")
-            (insert (concat "module.exports." name " = " name))
+            (insert (concat "exports." name " = " name))
             )
       )
     )
   )
 (defun coffee-global-require (name var)
   """globally require the package"""
-  (interactive "Mrequired package name: \nMvar name:\n")
+  (interactive "Mpackage name: \nMvar name:\n")
   (progn
     (save-excursion
       (goto-char (point-min))
       (insert (concat var " = " "require(\"" name "\")\n"))
       ))
   )
-(add-hook 'coffee-mode-hook
-          (lambda ()
-            
-            (global-set-key (kbd "C-c p") 'nodejs-export-selected-var)
-            (global-set-key (kbd "C-c C-p") 'nodejs-export-selected-var-as-module)
-            (global-set-key (kbd "C-c g") 'coffee-global-require)
-            ))
-(add-hook 'javascript-mode-hook
-          (lambda (
-                   (global-set-key (kbd "C-c p") 'nodejs-export-selected-var)
-                   (global-set-key (kbd "C-c C-p") 'nodejs-export-selected-var-as-module)
-                   ))
-          )
+(global-set-key (kbd "C-c p") 'nodejs-export-selected-var)
+(global-set-key (kbd "C-c g") 'coffee-global-require)

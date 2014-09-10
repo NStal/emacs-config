@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: forlist
+# key: forlist
+# --
+var __list = [];
+for(var i=0;i<$1.length;i++){
+	var item = $1[i];
+	item = $2;
+	__list.push(item);
+}

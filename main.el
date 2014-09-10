@@ -17,4 +17,8 @@
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (setq-default indent-tabs-mode nil)
 
+(put 'set-goal-column 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
 (provide 'main)
