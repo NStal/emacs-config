@@ -2,4 +2,5 @@
 (global-set-key [(meta n)] 'set-mark-command)
 (global-set-key [(control c) (control g)] 'goto-line)
 (global-set-key [(control c) (control s)] 'replace-string)
+(global-set-key [(control c) (m)] 'magit-status)
 (provide 'custom-hotkey)

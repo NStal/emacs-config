@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: httpreq
+# key: httpreq
+# --
+
+
+timeout = $3
+requestOption = urlModule.parse $1
+requestOption = ${2:"GET"}
+requestOption.headers = {
+    $4
+}
+req = ${3:http}.request requestOption,(res)->
+    buffers = []
+    req.on "data",(data)->
+        buffers.push data
+    req.on "end",()->
+        content = Buffer.concat buffers
+        $0
+req.end()
+req.setTimeout timeout,()->
+    req.hasTimeout = true
+req.on "error",(err)->
+    if req.hasTimeout
+        callback new Errors.Timeout("max timeout exceed #{timeout}")
+    else
+        callback new Errors.NetworkError("request error",{via:err})
+req.end()
