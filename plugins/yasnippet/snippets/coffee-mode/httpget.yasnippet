@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: httpget
+# key: httpget
+# --
+
+timeout = $1
+requestOption = urlModule.parse $2
+requestOption.method = ${3:"GET"}
+requestOption.headers = {
+    $4
+}
+req = ${5:http}.request requestOption,(res)->
+    buffers = []
+    res.on "data",(data)->
+        buffers.push data
+    res.on "end",()->
+        content = Buffer.concat buffers
+        $0
+req.setTimeout timeout,()->
+    req.hasTimeout = true
+req.on "error",(err)->
+    if req.hasTimeout
+        callback new Errors.Timeout("max timeout exceed #{timeout}")
+    else
+        callback new Errors.NetworkError("request error",{via:err})
+req.end()
