@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: forin
-# key: forin
-# --
-for(var item in ${1:object}){
-	$0
-}
