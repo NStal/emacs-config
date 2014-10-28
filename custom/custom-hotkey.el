@@ -5,4 +5,8 @@
 (global-set-key [(control c) (m)] 'magit-status)
 (global-set-key [(control c) (s) (l)] 'select-current-string-literal)
 (global-set-key [(control c) (s) (k)] 'select-current-string-literal-content)
+(global-set-key [(control c) (p)] 'nodejs-export-selected-var)
+(global-set-key [(control c) (g) (g)] 'coffee-global-require)
+(global-set-key [(control c) (g) (l)] 'coffee-local-require)
+
 (provide 'custom-hotkey)

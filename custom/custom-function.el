@@ -10,7 +10,7 @@
 (global-set-key (kbd "M-\"") (gen-pair-handler "\"" "\""))
 (global-set-key (kbd "M-(") (gen-pair-handler "(" ")"))
 (global-set-key (kbd "M-{") (gen-pair-handler "{" "}"))
-(global-set-key (kbd "M-{") (gen-pair-handler "{" "}"))
+(global-set-key (kbd "M-[") (gen-pair-handler "[" "]"))
 (provide 'custom-function)
 
 
@@ -60,8 +60,15 @@
       (insert (concat var " = " "require(\"" name "\")\n"))
       ))
   )
-(global-set-key (kbd "C-c p") 'nodejs-export-selected-var)
-(global-set-key (kbd "C-c g") 'coffee-global-require)
+(defun coffee-local-require (name var)
+  """globally require the package"""
+  (interactive "Mpackage name: \nMvar name:\n")
+  (progn
+    (save-excursion
+      (goto-char (point-min))
+      (insert (concat var " = " "require(\"" name ".coffee\")\n"))
+      ))
+  )
 
 
 
