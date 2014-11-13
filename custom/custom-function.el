@@ -69,6 +69,24 @@
       ))
   )
 
+(defun coffee-member-require (name var)
+  """globally require the package"""
+  (interactive
+   (let ((pname (read-string "package name:")) (pvar-default "hehe"))
+     (setq pvar-default (car (split-string (file-name-nondirectory pname) "\\.")))
+     (message pvar-default)
+     (let ((pvar (read-string "member name:")))
+       (list pname pvar)
+       )
+    ))
+  (progn
+    (save-excursion
+      (goto-char (point-min))
+      (insert (concat (format "%s = require(\"%s\").%s\n" var name var)))
+      (message (concat (format "%s = require(\"%s\").%s\n inserted" var name var)))
+      ))
+  )
+
 (defun coffee-local-require (name var)
   """globally require the package"""
   (interactive "Mpackage name: \nMvar name:\n")

@@ -8,5 +8,6 @@
 (global-set-key [(control c) (p)] 'nodejs-export-selected-var)
 (global-set-key [(control c) (g) (g)] 'coffee-global-require)
 (global-set-key [(control c) (g) (l)] 'coffee-local-require)
+(global-set-key [(control c) (g) (m)] 'coffee-local-require)
 
 (provide 'custom-hotkey)

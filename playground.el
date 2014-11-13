@@ -14,20 +14,20 @@
 
 
 
-(defun coffee-global-require (name var)
+(defun coffee-member-require (name var)
   """globally require the package"""
   (interactive
    (let ((pname (read-string "package name:")) (pvar-default "hehe"))
      (setq pvar-default (car (split-string (file-name-nondirectory pname) "\\.")))
      (message pvar-default)
-     (let ((pvar (read-string (format "variable name (%s):" pvar-default) nil nil pvar-default)))
+     (let ((pvar (read-string "member name:")))
        (list pname pvar)
        )
     ))
   (progn
     (save-excursion
       (goto-char (point-min))
-      (insert (concat var " = " "require(\"" name "\")\n"))
+      (insert (concat (format "%s = require(\"%s\").%s\n" var name var)))
       ))
   )
 
