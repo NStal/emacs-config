@@ -149,3 +149,22 @@
     )
 )
 
+(defun set-coffee-tab-width (width)
+  "set coffee tab width"
+  (interactive
+   (let ((default-width "4"))
+     (list (read-string (format "set coffee tab width to(default %s):" default-width) nil nil default-width))
+   ))
+  
+  (progn
+     (custom-set-variables
+      '(coffee-tab-width
+        
+        (if (stringp width)
+            (string-to-number width)
+          width
+          )
+        
+        )))
+    
+  )
