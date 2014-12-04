@@ -25,3 +25,5 @@
 (setq whitespace-style '(trailing space-before-tab indentation empty space-after-tab))
 
 (setq show-paren-delay 0)
+(tool-bar-mode -1)
+
