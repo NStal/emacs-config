@@ -1,0 +1,13 @@
+(global-set-key [f7] 'compile)
+(global-set-key [(meta n)] 'set-mark-command)
+(global-set-key [(control c) (control g)] 'goto-line)
+(global-set-key [(control c) (control s)] 'replace-string)
+(global-set-key [(control c) (m)] 'magit-status)
+(global-set-key [(control c) (s) (l)] 'select-current-string-literal)
+(global-set-key [(control c) (s) (k)] 'select-current-string-literal-content)
+(global-set-key [(control c) (p)] 'nodejs-export-selected-var)
+(global-set-key [(control c) (g) (g)] 'coffee-global-require)
+(global-set-key [(control c) (g) (l)] 'coffee-local-require)
+(global-set-key [(control c) (g) (m)] 'coffee-local-require)
+
+(provide 'custom-hotkey)

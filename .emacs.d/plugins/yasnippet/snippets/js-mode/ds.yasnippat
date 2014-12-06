@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: ds
-# key: ds
-# --
-
-var self = this;
