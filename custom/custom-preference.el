@@ -27,3 +27,6 @@
 (setq show-paren-delay 0)
 (tool-bar-mode -1)
 
+
+;; put ~ saves to . .saves dir
+(setq backup-directory-alist `(("." . "~/.saves")))
