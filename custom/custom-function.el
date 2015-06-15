@@ -168,3 +168,20 @@
         )))
     
   )
+
+(require 'cl)
+(defun parallel-replace (plist &optional start end)
+  (interactive
+   `(,(loop with input = (read-from-minibuffer "Replace: ")
+            with limit = (length input)
+            for (item . index) = (read-from-string input 0)
+                            then (read-from-string input index)
+            collect (prin1-to-string item t) until (<= limit index))
+     ,@(if (use-region-p) `(,(region-beginning) ,(region-end)))))
+  (let* ((alist (loop for (key val . tail) on plist by #'cddr
+                      collect (cons key val)))
+         (matcher (regexp-opt (mapcar #'car alist) 'words)))
+    (save-excursion
+      (goto-char (or start (point)))
+      (while (re-search-forward matcher (or end (point-max)) t)
+        (replace-match (cdr (assoc-string (match-string 0) alist)))))))
