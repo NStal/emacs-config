@@ -27,3 +27,5 @@
 
 
 (provide 'custom-plugin-load)
+
+(global-auto-revert-mode t)
