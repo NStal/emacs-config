@@ -185,3 +185,64 @@
       (goto-char (or start (point)))
       (while (re-search-forward matcher (or end (point-max)) t)
         (replace-match (cdr (assoc-string (match-string 0) alist)))))))
+
+
+(defun toggle-camelcase-underscores ()
+  "Toggle between camcelcase and underscore notation for the symbol at point."
+  (interactive)
+  (save-excursion
+    (let* ((bounds (bounds-of-thing-at-point 'symbol))
+           (start (car bounds))
+           (end (cdr bounds))
+           (currently-using-underscores-p (progn (goto-char start)
+                                                 (re-search-forward "_" end t))))
+      (if currently-using-underscores-p
+          (progn
+            (upcase-initials-region start end)
+            (replace-string "_" "" nil start end)
+            (downcase-region start (1+ start)))
+        (replace-regexp "\\([A-Z]\\)" "_\\1" nil (1+ start) end)
+        (downcase-region start end)))))
+(defun toggle-camelcase-slug ()
+  "Toggle between camcelcase and underscore notation for the symbol at point."
+  (interactive)
+  (save-excursion
+    (let* ((bounds (bounds-of-thing-at-point 'symbol))
+           (start (car bounds))
+           (end (cdr bounds))
+           (currently-using-underscores-p (progn (goto-char start)
+                                                 (re-search-forward "-" end t))))
+      (if currently-using-underscores-p
+          (progn
+            (upcase-initials-region start end)
+            (replace-string "-" "" nil start end)
+            (downcase-region start (1+ start)))
+        (replace-regexp "\\([A-Z]\\)" "-\\1" nil (1+ start) end)
+        (downcase-region start end)))))
+
+(defun xah-toggle-letter-case (φp1 φp2)
+  "Toggle the letter case of current word or text selection.
+Always cycle in this order: Init Caps, ALL CAPS, all lower.
+
+In lisp code, φp1 φp2 are region boundary.
+URL `http://ergoemacs.org/emacs/modernization_upcase-word.html'
+Version 2015-04-09"
+  (interactive
+   (if (use-region-p)
+       (list (region-beginning) (region-end))
+     (let ((ξbds (bounds-of-thing-at-point 'word)))
+       (list (car ξbds) (cdr ξbds)))))
+  (let ((deactivate-mark nil))
+    (when (not (eq last-command this-command))
+      (put this-command 'state 0))
+    (cond
+     ((equal 0 (get this-command 'state))
+      (upcase-initials-region φp1 φp2)
+      (put this-command 'state 1))
+     ((equal 1  (get this-command 'state))
+      (upcase-region φp1 φp2)
+      (put this-command 'state 2))
+     ((equal 2 (get this-command 'state))
+      (downcase-region φp1 φp2)
+      (put this-command 'state 0)))))
+
